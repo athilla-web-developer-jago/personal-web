@@ -333,3 +333,45 @@ body::before {
     backdrop-filter: blur(10px); /* Efek kaca buram (glassmorphism) */
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
+/* Sembunyikan kursor asli agar crosshair kustom terlihat */
+body {
+    cursor: none !important;
+}
+
+/* Kursor Crosshair Utama */
+.crosshair-main {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--neon-blue);
+    border-radius: 50%; /* Bulat */
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Titik tengah crosshair */
+.crosshair-main::after {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: var(--neon-yellow);
+    border-radius: 50%;
+}
+
+/* Efek Duplikasi (Trail) */
+.trail-duplicate {
+    position: fixed;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--neon-blue);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    opacity: 0.5;
+    transition: all 0.4s ease-out; /* Kecepatan jejak menghilang */
+}
