@@ -274,6 +274,7 @@ footer {
     .nav-links { display: none; }
     .menu-toggle { display: block; }
     .hero h1 { font-size: 2rem; }
+    
 }
 /* Mouse Trail Effect */
 .mouse-trail {
@@ -297,4 +298,38 @@ footer {
     height: 10px;
     background-color: var(--neon-yellow);
     box-shadow: 0 0 5px var(--neon-yellow), 0 0 10px var(--neon-yellow);
+    
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    /* Menggunakan gambar tema Cyberpunk City Night */
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Membuat background tidak ikut bergerak saat scroll */
+    color: var(--text-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Menambahkan efek blur samar pada background utama agar konten lebih menonjol */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    filter: blur(8px); /* Mengatur tingkat kesamaran kota */
+    z-index: -1;
+    transform: scale(1.1); /* Menghindari garis putih di pinggiran karena blur */
+}
+
+/* Opsional: Membuat card sedikit transparan agar gambar kota terlihat samar di belakangnya */
+.about-content, .timeline-content, .skill-card, .contact-card {
+    background: rgba(22, 22, 22, 0.85) !important;
+    backdrop-filter: blur(10px); /* Efek kaca buram (glassmorphism) */
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
