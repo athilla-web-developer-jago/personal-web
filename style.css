@@ -275,3 +275,26 @@ footer {
     .menu-toggle { display: block; }
     .hero h1 { font-size: 2rem; }
 }
+/* Mouse Trail Effect */
+.mouse-trail {
+    position: fixed;
+    pointer-events: none; /* Penting agar tidak menghalangi klik elemen di bawahnya */
+    width: 20px; /* Ukuran awal titik trail */
+    height: 20px;
+    background-color: var(--neon-blue); /* Warna trail */
+    border-radius: 50%;
+    opacity: 0; /* Mulai dengan transparan */
+    transform: scale(0); /* Mulai dengan skala nol */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out, background-color 0.3s ease-out;
+    z-index: 9999; /* Pastikan di atas semua elemen lain */
+    filter: blur(5px); /* Efek blur untuk kesan glow */
+    box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+}
+
+/* Modifikasi agar trail terlihat lebih dinamis (opsional) */
+.mouse-trail.small {
+    width: 10px;
+    height: 10px;
+    background-color: var(--neon-yellow);
+    box-shadow: 0 0 5px var(--neon-yellow), 0 0 10px var(--neon-yellow);
+}
