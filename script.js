@@ -70,37 +70,54 @@ if (menuToggle) { // Pastikan menuToggle ada sebelum menambahkan event listener
     });
 }
 
+// Inisialisasi Kursor Utama
+const mainCursor = document.createElement('div');
+mainCursor.classList.add('crosshair-main');
+document.body.appendChild(mainCursor);
 
-/* === MOUSE TRAIL EFFECT (Sandevistan Style) === */
-document.addEventListener('mousemove', function(e) {
-    const trail = document.createElement('div');
-    trail.classList.add('mouse-trail');
-    document.body.appendChild(trail);
-
+// Listener Pergerakan Mouse
+document.addEventListener('mousemove', (e) => {
     const x = e.clientX;
     const y = e.clientY;
 
+    // Gerakkan kursor utama seketika
+    mainCursor.style.left = `${x}px`;
+    mainCursor.style.top = `${y}px`;
+
+    // Buat elemen duplikat untuk efek trail
+    createTrail(x, y);
+});
+
+function createTrail(x, y) {
+    const trail = document.createElement('div');
+    trail.classList.add('trail-duplicate');
+    
+    // Set posisi awal di lokasi mouse saat ini
     trail.style.left = `${x}px`;
     trail.style.top = `${y}px`;
+    
+    document.body.appendChild(trail);
 
-    // Efek skala dan opacity
-    setTimeout(() => {
-        trail.style.opacity = '1';
-        trail.style.transform = 'scale(1)';
-    }, 1); // Delay kecil agar transisi terlihat
-
-    // Membuat trail lebih kecil atau berubah warna setelah beberapa saat
-    // Ini memberikan kesan "Sandevistan" yang cepat memudar
-    setTimeout(() => {
-        trail.classList.add('small'); // Ganti ke warna kuning atau ukuran kecil
-    }, 100);
-
-    // Hapus trail setelah beberapa waktu
+    // Animasi menghilang (Sandevistan style)
     setTimeout(() => {
         trail.style.opacity = '0';
-        trail.style.transform = 'scale(0)';
-        trail.addEventListener('transitionend', () => {
-            trail.remove();
-        });
-    }, 500); // Trail akan hilang dalam 0.5 detik
+        trail.style.transform = 'translate(-50%, -50%) scale(0.5)';
+    }, 50); // Delay singkat sebelum mulai memudar
+
+    // Hapus elemen dari DOM setelah animasi selesai agar tidak berat
+    setTimeout(() => {
+        trail.remove();
+    }, 450);
+}
+
+// Pastikan kursor muncul kembali saat klik link (UX agar tidak bingung)
+document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        mainCursor.style.borderColor = 'var(--neon-yellow)';
+        mainCursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+        mainCursor.style.borderColor = 'var(--neon-blue)';
+        mainCursor.style.transform = 'translate(-50%, -50%) scale(1)';
+    });
 });
